@@ -1,7 +1,7 @@
 version: '2'
 services:
   cAdvisor:
-          image: google/cadvisor:latest
+    image: google/cadvisor:latest
     stdin_open: true
     volumes:
     - /:/rootfs:ro
