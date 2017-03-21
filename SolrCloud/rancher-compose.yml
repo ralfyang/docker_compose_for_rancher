@@ -1,0 +1,17 @@
+version: '2'
+services:
+  solr-master:
+    scale: 1
+    start_on_create: true
+  zookeeper:
+    scale: 1
+    start_on_create: true
+  solr2:
+    scale: 1
+    start_on_create: true
+  solr3:
+    scale: 1
+    start_on_create: true
+  solr4:
+    scale: 1
+    start_on_create: true

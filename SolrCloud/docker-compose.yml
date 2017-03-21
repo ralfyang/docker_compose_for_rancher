@@ -1,0 +1,48 @@
+version: '2'
+services:
+  solr-master:
+    image: solr:6.2.1
+    links:
+    - zookeeper:zookeeper
+    ports:
+    - 8983:8983/tcp
+    command:
+    - bash
+    - -c
+    - /opt/solr/bin/solr start -f -z zookeeper:2181
+  zookeeper:
+    image: jplock/zookeeper:3.4.8
+    ports:
+    - 2181:2181/tcp
+    - 2888:2888/tcp
+    - 3888:3888/tcp
+  solr2:
+    image: solr:6.2.1
+    links:
+    - solr-master:solr-master
+    - zookeeper:zookeeper
+    command:
+    - bash
+    - -c
+    - /opt/solr/bin/solr start -f -z zookeeper:2181
+  solr3:
+    image: solr:6.2.1
+    links:
+    - solr2:solr2
+    - solr-master:solr-master
+    - zookeeper:zookeeper
+    command:
+    - bash
+    - -c
+    - /opt/solr/bin/solr start -f -z zookeeper:2181
+  solr4:
+    image: solr:6.2.1
+    links:
+    - solr3:solr3
+    - solr2:solr2
+    - solr-master:solr-master
+    - zookeeper:zookeeper
+    command:
+    - bash
+    - -c
+    - /opt/solr/bin/solr start -f -z zookeeper:2181

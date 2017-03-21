@@ -1,0 +1,4 @@
+version: '2'
+services:
+  cAdvisor:
+    start_on_create: true
