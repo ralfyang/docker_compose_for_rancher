@@ -1,5 +1,11 @@
 version: '2'
 services:
+  es-sysctl:
+    privileged: true
+    image: rawmind/alpine-sysctl:0.1
+    environment:
+      SYSCTL_KEY: vm.max_map_count
+      SYSCTL_VALUE: '262144'
   logstash:
     image: logstash
     links:
