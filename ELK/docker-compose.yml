@@ -6,6 +6,8 @@ services:
     environment:
       SYSCTL_KEY: vm.max_map_count
       SYSCTL_VALUE: '262144'
+    labels:
+      io.rancher.container.start_once: 'true'
   logstash:
     image: logstash
     links:
@@ -26,6 +28,8 @@ services:
       logging loops\! BEWARE\!  stdout {    codec => rubydebug  }}'
   elasticsearch:
     image: elasticsearch
+    links:
+    - es-sysctl
   kibana:
     image: kibana
     environment:
